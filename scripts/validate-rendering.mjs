@@ -1,7 +1,9 @@
 import { readdirSync, readFileSync } from "node:fs";
-import { extname, join, relative } from "node:path";
+import { dirname, extname, join, relative, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = process.cwd();
+const scriptDirectory = dirname(fileURLToPath(import.meta.url));
+const root = resolve(scriptDirectory, "..");
 const appDirectory = join(root, "src/app");
 const routeFilePattern = /^(page|layout)\.(?:js|jsx|ts|tsx)$/;
 const clientDirectivePattern = /^\s*["']use client["'];?/m;

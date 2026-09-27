@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from "node:fs";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 
-const root = process.cwd();
+const scriptDirectory = dirname(fileURLToPath(import.meta.url));
+const root = resolve(scriptDirectory, "..");
 const load = (path) => JSON.parse(readFileSync(resolve(root, path), "utf8"));
 const products = load("src/data/products.json");
 const ingredients = load("src/data/ingredients.json");
